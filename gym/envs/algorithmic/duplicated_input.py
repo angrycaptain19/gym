@@ -12,8 +12,7 @@ class DuplicatedInputEnv(algorithmic_env.TapeAlgorithmicEnv):
 
     def generate_input_data(self, size):
         res = []
-        if size < self.duplication:
-            size = self.duplication
+        size = max(size, self.duplication)
         for _ in range(size // self.duplication):
             char = self.np_random.randint(self.base)
             for _ in range(self.duplication):

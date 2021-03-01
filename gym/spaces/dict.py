@@ -64,11 +64,14 @@ class Dict(Space):
         return self.spaces[key]
         
     def __iter__(self):
-        for key in self.spaces:
-            yield key
+        yield from self.spaces
 
     def __repr__(self):
-        return "Dict(" + ", ". join([str(k) + ":" + str(s) for k, s in self.spaces.items()]) + ")"
+        return (
+            "Dict("
+            + ", ".join(str(k) + ":" + str(s) for k, s in self.spaces.items())
+            + ")"
+        )
 
     def to_jsonable(self, sample_n):
         # serialize as dict-repr of vectors
@@ -81,9 +84,7 @@ class Dict(Space):
             dict_of_list[key] = space.from_jsonable(sample_n[key])
         ret = []
         for i, _ in enumerate(dict_of_list[key]):
-            entry = {}
-            for key, value in dict_of_list.items():
-                entry[key] = value[i]
+            entry = {key: value[i] for key, value in dict_of_list.items()}
             ret.append(entry)
         return ret
 

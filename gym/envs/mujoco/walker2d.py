@@ -16,8 +16,7 @@ class Walker2dEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         reward = ((posafter - posbefore) / self.dt)
         reward += alive_bonus
         reward -= 1e-3 * np.square(a).sum()
-        done = not (height > 0.8 and height < 2.0 and
-                    ang > -1.0 and ang < 1.0)
+        done = height <= 0.8 or height >= 2.0 or ang <= -1.0 or ang >= 1.0
         ob = self._get_obs()
         return ob, reward, done, {}
 

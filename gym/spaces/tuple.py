@@ -19,7 +19,7 @@ class Tuple(Space):
         [space.seed(seed) for space in self.spaces]
 
     def sample(self):
-        return tuple([space.sample() for space in self.spaces])
+        return tuple(space.sample() for space in self.spaces)
 
     def contains(self, x):
         if isinstance(x, list):
@@ -28,7 +28,7 @@ class Tuple(Space):
             space.contains(part) for (space,part) in zip(self.spaces,x))
 
     def __repr__(self):
-        return "Tuple(" + ", ". join([str(s) for s in self.spaces]) + ")"
+        return "Tuple(" + ", ". join(str(s) for s in self.spaces) + ")"
 
     def to_jsonable(self, sample_n):
         # serialize as list-repr of tuple of vectors

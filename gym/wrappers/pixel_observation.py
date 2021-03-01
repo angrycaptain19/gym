@@ -109,8 +109,7 @@ class PixelObservationWrapper(ObservationWrapper):
         self._pixel_keys = pixel_keys
 
     def observation(self, observation):
-        pixel_observation = self._add_pixel_observation(observation)
-        return pixel_observation
+        return self._add_pixel_observation(observation)
 
     def _add_pixel_observation(self, wrapped_observation):
         if self._pixels_only:
