@@ -16,8 +16,7 @@ env_id_re = re.compile(r'^(?:[\w:-]+\/)?([\w:.-]+)-v(\d+)$')
 def load(name):
     mod_name, attr_name = name.split(":")
     mod = importlib.import_module(mod_name)
-    fn = getattr(mod, attr_name)
-    return fn
+    return getattr(mod, attr_name)
 
 
 class EnvSpec(object):

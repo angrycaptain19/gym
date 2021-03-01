@@ -1,13 +1,13 @@
 """
 2D rendering framework
 """
+
 import os
 import sys
 
-if "Apple" in sys.version:
-    if 'DYLD_FALLBACK_LIBRARY_PATH' in os.environ:
-        os.environ['DYLD_FALLBACK_LIBRARY_PATH'] += ':/usr/lib'
-        # (JDS 2016/04/15): avoid bug on Anaconda 2.3.0 / Yosemite
+if "Apple" in sys.version and 'DYLD_FALLBACK_LIBRARY_PATH' in os.environ:
+    os.environ['DYLD_FALLBACK_LIBRARY_PATH'] += ':/usr/lib'
+    # (JDS 2016/04/15): avoid bug on Anaconda 2.3.0 / Yosemite
 
 from gym import error
 
@@ -276,8 +276,7 @@ def make_capsule(length, width):
     circ0 = make_circle(width/2)
     circ1 = make_circle(width/2)
     circ1.add_attr(Transform(translation=(length, 0)))
-    geom = Compound([box, circ0, circ1])
-    return geom
+    return Compound([box, circ0, circ1])
 
 class Compound(Geom):
     def __init__(self, gs):

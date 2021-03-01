@@ -66,7 +66,7 @@ class ContactDetector(contactListener):
         self.env = env
 
     def BeginContact(self, contact):
-        if self.env.lander == contact.fixtureA.body or self.env.lander == contact.fixtureB.body:
+        if self.env.lander in [contact.fixtureA.body, contact.fixtureB.body]:
             self.env.game_over = True
         for i in range(2):
             if self.env.legs[i] in [contact.fixtureA.body, contact.fixtureB.body]:
@@ -442,7 +442,7 @@ def demo_heuristic_lander(env, seed=None, render=False):
             if still_open == False: break
 
         if steps % 20 == 0 or done:
-            print("observations:", " ".join(["{:+0.2f}".format(x) for x in s]))
+            print("observations:", " ".join("{:+0.2f}".format(x) for x in s))
             print("step {} total_reward {:+0.2f}".format(steps, total_reward))
         steps += 1
         if done: break

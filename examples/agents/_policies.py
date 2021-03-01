@@ -6,8 +6,7 @@ class BinaryActionLinearPolicy(object):
         self.b = theta[-1]
     def act(self, ob):
         y = ob.dot(self.w) + self.b
-        a = int(y < 0)
-        return a
+        return int(y < 0)
 
 class ContinuousActionLinearPolicy(object):
     def __init__(self, theta, n_in, n_out):
@@ -15,5 +14,4 @@ class ContinuousActionLinearPolicy(object):
         self.W = theta[0 : n_in * n_out].reshape(n_in, n_out)
         self.b = theta[n_in * n_out : None].reshape(1, n_out)
     def act(self, ob):
-        a = ob.dot(self.W) + self.b
-        return a
+        return ob.dot(self.W) + self.b

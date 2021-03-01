@@ -104,8 +104,7 @@ class MujocoEnv(gym.Env):
 
     def reset(self):
         self.sim.reset()
-        ob = self.reset_model()
-        return ob
+        return self.reset_model()
 
     def set_state(self, qpos, qvel):
         assert qpos.shape == (self.model.nq,) and qvel.shape == (self.model.nv,)
@@ -130,7 +129,7 @@ class MujocoEnv(gym.Env):
                height=DEFAULT_SIZE,
                camera_id=None,
                camera_name=None):
-        if mode == 'rgb_array' or mode == 'depth_array':
+        if mode in ['rgb_array', 'depth_array']:
             if camera_id is not None and camera_name is not None:
                 raise ValueError("Both `camera_id` and `camera_name` cannot be"
                                  " specified at the same time.")
@@ -170,7 +169,7 @@ class MujocoEnv(gym.Env):
         if self.viewer is None:
             if mode == 'human':
                 self.viewer = mujoco_py.MjViewer(self.sim)
-            elif mode == 'rgb_array' or mode == 'depth_array':
+            elif mode in ['rgb_array', 'depth_array']:
                 self.viewer = mujoco_py.MjRenderContextOffscreen(self.sim, -1)
 
             self.viewer_setup()

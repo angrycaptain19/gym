@@ -589,7 +589,7 @@ for game in ['adventure', 'air_raid', 'alien', 'amidar', 'assault', 'asterix', '
     'venture', 'video_pinball', 'wizard_of_wor', 'yars_revenge', 'zaxxon']:
     for obs_type in ['image', 'ram']:
         # space_invaders should yield SpaceInvaders-v0 and SpaceInvaders-ram-v0
-        name = ''.join([g.capitalize() for g in game.split('_')])
+        name = ''.join(g.capitalize() for g in game.split('_'))
         if obs_type == 'ram':
             name = '{}-ram'.format(name)
 
@@ -618,11 +618,7 @@ for game in ['adventure', 'air_raid', 'alien', 'amidar', 'assault', 'asterix', '
         )
 
         # Standard Deterministic (as in the original DeepMind paper)
-        if game == 'space_invaders':
-            frameskip = 3
-        else:
-            frameskip = 4
-
+        frameskip = 3 if game == 'space_invaders' else 4
         # Use a deterministic frame skip.
         register(
             id='{}Deterministic-v0'.format(name),
